@@ -4,7 +4,8 @@ import {
   paramCase,
   constantCase,
   snakeCase,
-  pascalCaseTransformMerge
+  pascalCaseTransformMerge,
+  Options
 } from 'change-case';
 
 export enum IndentationTypes {
@@ -77,7 +78,12 @@ export class FormatHelpers {
    * @param {string} value to transform
    * @returns {string}
    */
-  static toCamelCase = camelCase;
+  static toCamelCase = (renderName:string, options?: Options): string=>{
+    return renderName
+    .split('_')
+    .map((word)=>camelCase(word,options))
+    .join('_');
+  }
 
   /**
    * Transform into a string of capitalized words without separators.
